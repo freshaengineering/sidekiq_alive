@@ -1,12 +1,12 @@
 version: 1
-generated_at: 2026-05-25T15:32:28Z
+generated_at: 2026-06-11T15:40:36Z
 internal: []
 trusted:
   - action: actions/checkout
     refs:
-      - v4
+      - 34e114876b0b11c390a56381ad16ebd13914f8d5
     occurrences:
-      v4:
+      34e114876b0b11c390a56381ad16ebd13914f8d5:
         .github/workflows/changelog.yml:
           - jobs.release.steps.[0].uses
         .github/workflows/release.yml:
