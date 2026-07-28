@@ -16,11 +16,9 @@ jobs:
         with:
           use-policy-store: true
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      -
-        name: Create GitHub release
+      - name: Create GitHub release
         uses: step-security/action-gh-release@d2093dbdaf0c6507874908247e14bbc4dee6a72d # v3.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
