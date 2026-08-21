@@ -1,5 +1,5 @@
 version: 1
-generated_at: 2026-06-11T15:40:36Z
+generated_at: 2026-08-21T11:40:55Z
 internal: []
 trusted:
   - action: actions/checkout
@@ -8,6 +8,27 @@ trusted:
     occurrences:
       34e114876b0b11c390a56381ad16ebd13914f8d5:
         .github/workflows/changelog.yml:
+          - jobs.release.steps.[1].uses
+        .github/workflows/release.yml:
+          - jobs.release.steps.[1].uses
+        .github/workflows/test.yml:
+          - jobs.rubocop.steps.[1].uses
+          - jobs.coverage.steps.[1].uses
+          - jobs.test.steps.[1].uses
+external:
+  - action: step-security/action-gh-release
+    refs:
+      - d2093dbdaf0c6507874908247e14bbc4dee6a72d
+    occurrences:
+      d2093dbdaf0c6507874908247e14bbc4dee6a72d:
+        .github/workflows/changelog.yml:
+          - jobs.release.steps.[2].uses
+  - action: step-security/harden-runner
+    refs:
+      - 9af89fc71515a100421586dfdb3dc9c984fbf411
+    occurrences:
+      9af89fc71515a100421586dfdb3dc9c984fbf411:
+        .github/workflows/changelog.yml:
           - jobs.release.steps.[0].uses
         .github/workflows/release.yml:
           - jobs.release.steps.[0].uses
@@ -15,25 +36,29 @@ trusted:
           - jobs.rubocop.steps.[0].uses
           - jobs.coverage.steps.[0].uses
           - jobs.test.steps.[0].uses
-external:
-  - action: ruby/setup-ruby
+  - action: step-security/mise-action
     refs:
-      - afeafc3d1ab54a631816aba4c914a0081c12ff2f
+      - 2796166110dee826668caddd4bffedae5116e7cd
     occurrences:
-      afeafc3d1ab54a631816aba4c914a0081c12ff2f:
+      2796166110dee826668caddd4bffedae5116e7cd:
         .github/workflows/release.yml:
-          - jobs.release.steps.[1].uses
+          - jobs.release.steps.[2].uses
         .github/workflows/test.yml:
-          - jobs.rubocop.steps.[1].uses
-          - jobs.coverage.steps.[1].uses
-          - jobs.test.steps.[1].uses
-  - action: softprops/action-gh-release
+          - jobs.rubocop.steps.[2].uses
+          - jobs.coverage.steps.[2].uses
+          - jobs.test.steps.[2].uses
+  - action: step-security/runs-on-cache
     refs:
-      - de2c0eb89ae2a093876385947365aca7b0e5f844
+      - c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73
     occurrences:
-      de2c0eb89ae2a093876385947365aca7b0e5f844:
-        .github/workflows/changelog.yml:
-          - jobs.release.steps.[1].uses
+      c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73:
+        .github/workflows/release.yml:
+          - jobs.release.steps.[3].uses
+        .github/workflows/test.yml:
+          - jobs.rubocop.steps.[3].uses
+          - jobs.coverage.steps.[3].uses
+          - jobs.test.steps.[3].uses
 local: []
 docker: []
 dynamic: []
+nested_floating_deps: []
