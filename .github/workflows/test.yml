@@ -23,7 +23,9 @@ jobs:
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Setup mise
-        uses: step-security/mise-action@2796166110dee826668caddd4bffedae5116e7cd # v4.2.0
+        uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
+        with:
+          version: '2026.8.12'
       - name: Cache gems
         uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
         with:
@@ -60,7 +62,9 @@ jobs:
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Setup mise
-        uses: step-security/mise-action@2796166110dee826668caddd4bffedae5116e7cd # v4.2.0
+        uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
+        with:
+          version: '2026.8.12'
       - name: Cache gems
         uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
         with:
@@ -128,7 +132,9 @@ jobs:
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Setup mise
-        uses: step-security/mise-action@2796166110dee826668caddd4bffedae5116e7cd # v4.2.0
+        uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
+        with:
+          version: '2026.8.12'
       - name: Cache gems
         uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
         with:
