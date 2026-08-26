@@ -18,7 +18,7 @@ module SidekiqAlive
         sq_config.on(:startup) do
           SidekiqAlive::Worker.sidekiq_options(queue: current_queue)
 
-          if Helpers.sidekiq_7
+          if Helpers.sidekiq_7?
             sq_config.capsule(CAPSULE_NAME) do |cap|
               cap.concurrency = 2
               cap.queues = [current_queue]
@@ -73,7 +73,7 @@ module SidekiqAlive
 
     def purge_pending_jobs
       schedule_set = Sidekiq::ScheduledSet.new
-      jobs = if Helpers.sidekiq_5
+      jobs = if Helpers.sidekiq_5?
         schedule_set.select { |job| job.klass == "SidekiqAlive::Worker" && job.queue == current_queue }
       else
         schedule_set.scan('"class":"SidekiqAlive::Worker"').select { |job| job.queue == current_queue }
@@ -145,7 +145,7 @@ module SidekiqAlive
     end
 
     def successful_startup_text
-      "Successfully started sidekiq-alive, registered with key: "\
+      "Successfully started sidekiq-alive, registered with key: " \
         "#{current_instance_register_key} on set #{HOSTNAME_REGISTRY}"
     end
 
