@@ -22,11 +22,19 @@ jobs:
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: step-security/setup-ruby@37a6ba0604c7193dff21a6bfe974221525e0b2b8 # v1.321.0
+      - name: Setup mise
+        uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
         with:
-          bundler-cache: true
-          cache-version: 1
+          version: '2026.8.12'
+      - name: Cache gems
+        uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile.lock') }}
+      - name: Install gems
+        run: |
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4 --retry 3
       - name: Run lint
         run: bundle exec rubocop --color
   coverage:
@@ -53,11 +61,19 @@ jobs:
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: step-security/setup-ruby@37a6ba0604c7193dff21a6bfe974221525e0b2b8 # v1.321.0
+      - name: Setup mise
+        uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
         with:
-          bundler-cache: true
-          cache-version: 1
+          version: '2026.8.12'
+      - name: Cache gems
+        uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile.lock') }}
+      - name: Install gems
+        run: |
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4 --retry 3
       - name: Run tests
         run: bundle exec rspec
       # - name: Code Coverage Summary
@@ -110,12 +126,22 @@ jobs:
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - name: Set up Ruby ${{ matrix.ruby-version }} with Sidekiq ${{ matrix.sidekiq-version }}
-        uses: step-security/setup-ruby@37a6ba0604c7193dff21a6bfe974221525e0b2b8 # v1.321.0
+      - name: Setup mise
+        uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
         with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
-          cache-version: 1
+          version: '2026.8.12'
+          mise_toml: |
+            [tools]
+            ruby = "${{ matrix.ruby-version }}"
+      - name: Cache gems
+        uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ matrix.ruby-version }}-${{ matrix.sidekiq-version }}-${{ hashFiles('Gemfile.lock') }}
+      - name: Install gems
+        run: |
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4 --retry 3
         env:
           SIDEKIQ_VERSION_RANGE: ${{ matrix.sidekiq-version }}
       - name: Run tests
